@@ -36,10 +36,11 @@ function getGeminiClient() {
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(",")
-  : ["https://nutripall.netlify.app", "http://localhost:3000", "http://127.0.0.1:3000"];
-app.use(cors({ origin: allowedOrigins }));
+// Always allow production frontend + any extra origins from env
+const defaultOrigins = ["https://nutripall.netlify.app", "http://localhost:3000", "http://127.0.0.1:3000"];
+const envOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",").map(s => s.trim()).filter(Boolean) : [];
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 const PORT = process.env.PORT || 8081;
 
