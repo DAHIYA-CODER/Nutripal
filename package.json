@@ -1,0 +1,9 @@
+{
+    "name": "nutripal-root",
+    "version": "1.0.0",
+    "description": "Root package.json to help deployment services build the server.",
+    "scripts": {
+        "build": "npm install --prefix server",
+        "start": "npm start --prefix server"
+    }
+}
