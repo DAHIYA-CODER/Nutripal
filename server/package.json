@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "seed": "node seed.js",
-    "build": "npm run build"
+    "seed": "node seed.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.17.2",
