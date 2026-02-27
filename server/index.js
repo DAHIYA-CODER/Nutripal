@@ -36,7 +36,10 @@ function getGeminiClient() {
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors({ origin: process.env.CORS_ORIGIN?.split(",") || "*" }));
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : ["https://nutripall.netlify.app", "http://localhost:3000", "http://127.0.0.1:3000"];
+app.use(cors({ origin: allowedOrigins }));
 
 const PORT = process.env.PORT || 8081;
 
